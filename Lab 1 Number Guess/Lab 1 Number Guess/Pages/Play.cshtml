@@ -1,0 +1,8 @@
+﻿@page
+@model PlayModel
+@namespace Lab_1_Number_Guess.Pages
+<h2>Can You Guess The Number?</h2>
+<br />@Model.Message
+<br />
+<form method="post"><input type="text" name="guess" /><input type="hidden" name="answer" guess="@Model.Answer" /><input type="submit" value="Check Answer" /></form>
+<br />@Model.Answer

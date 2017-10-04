@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
+using System.Web;
 
 namespace Lab_1_Number_Guess.Pages
 {
@@ -47,6 +48,7 @@ namespace Lab_1_Number_Guess.Pages
             {
                 Message = "Oops, we couldn't check that number, try again!";
             }
+
 
             
             return Page();

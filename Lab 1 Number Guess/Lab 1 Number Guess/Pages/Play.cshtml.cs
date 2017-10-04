@@ -10,19 +10,21 @@ namespace Lab_1_Number_Guess.Pages
 {
     public class PlayModel : PageModel
     {
-        const string SessionKeyNumber = "_CorrectNumber";
-        public int Answer = 0;
-        public string Message = "Enter your guess below:";
+        public int Answer { get; set; }
+        public string Message { get; set; }
 
 
         public void OnGet()
         {
             Answer = RandomNumber();
+            Message = "Enter your guess below:";
         }
 
 
 
 
+
+ 
 
         public IActionResult OnPost()
         {
@@ -45,6 +47,8 @@ namespace Lab_1_Number_Guess.Pages
             {
                 Message = "Oops, we couldn't check that number, try again!";
             }
+
+            
             return Page();
 
         }

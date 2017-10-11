@@ -1,13 +1,12 @@
 ﻿@page
-@model PlayModel
-@namespace Lab_1_Number_Guess.Pages
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+    @model PlayModel
 @{ 
     var Message = Html.Raw(Model.Message);
+    Layout = "_Layout";
+    ViewData["Title"] = "Play";
 }
 <h2>Can You Guess The Number?</h2>
 <br />@Message
 <br />
-<form method="post"><input type="text" name="guess" /><input type="hidden" name="answer" value="@Model.Answer" /><input type="submit" value="Check Answer" /></form>
+<form method="post"><input type="text" name="guess" /><input type="submit" value="Check Answer" /></form>
 <br />@Model.Answer

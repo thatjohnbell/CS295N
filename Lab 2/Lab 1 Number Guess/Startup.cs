@@ -22,6 +22,16 @@ namespace Lab_1_Number_Guess
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+
+            //adds session config
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(500);
+                options.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +48,9 @@ namespace Lab_1_Number_Guess
             }
 
             app.UseStaticFiles();
+
+            //intializes session config
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

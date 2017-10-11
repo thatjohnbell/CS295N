@@ -11,58 +11,73 @@ namespace Lab_1_Number_Guess.Pages
 {
     public class PlayModel : PageModel
     {
-        public int Answer { get; set; }
+        private int answer;
+
         public string Message { get; set; }
 
-
-        public void OnGet()
+        public int Answer
         {
-            Answer = RandomNumber();
-            Message = "Enter your guess below:";
+            get { return answer; }
+            set { answer = value; }
         }
 
+        NumberGuess ng;
+        const string RND_NUM = "Random_Number";
 
-
-
-
- 
-
+        //on get request
+        public void OnGet()
+        {
+            answer = NewNumber();
+            Message = "Enter your guess below:";
+        }
+        
+        //on post request
         public IActionResult OnPost()
         {
-            Answer = int.Parse(Request.Form["answer"]);
-
+            answer = GetNumber();
             try
             {
+                NumberGuess ng = new NumberGuess(answer);
                 int guess = int.Parse(Request.Form["guess"]);
-                if (guess > Answer) Message = "Too High!<br />&nbsp;<br />Guess again:";
-                else if (guess < Answer) Message = "Too Low!<br />&nbsp;<br />You'll get it this time!";
+                //if the checkanswer method finds a match then it will select a new random number, will return display text string
+                //best practice would have been to return a value then assign the string based on value since the text of the message should be on presentation layer and not business
+                int check = ng.CheckAnswer(guess);
+                if (check > 0) Message = "Too High!<br />&nbsp;<br />Guess again:";
+                else if (check < 0) Message = "Too Low!<br />&nbsp;<br />You'll get it this time!";
                 else
                 {
-                    Message = "Wow! You got it!<br /><font size=\"+1\">The Number Was " + Answer + "!</font><br />&nbsp;<br />I've got a harder one now..<br />Try and see if you can guess it!";
-                    Answer = RandomNumber();
+                    Message = "Wow! You got it!<br /><font size=\"+1\">The Number Was " + answer + "!</font><br />&nbsp;<br />I've got a harder one now..<br />Try and see if you can guess it!";
+                    answer = NewNumber();
                 }
-
-
             }
             catch
             {
+                //if something above failed then have them try again
                 Message = "Oops, we couldn't check that number, try again!";
             }
-
-
-            
             return Page();
-
         }
-
-
-        public int RandomNumber()
+        //assign number to session
+        public void SaveNumber(int number)
         {
-                Random rn = new Random();
-            return rn.Next(1, 1000);
+            HttpContext.Session.SetInt32(RND_NUM,number);
         }
 
+        public int NewNumber()
+        {
+            ng = new NumberGuess();
+            answer = ng.Number;
+            SaveNumber(answer);
+            return answer;
+        }
 
-
+        public int GetNumber()
+        {
+            int r = (int)HttpContext.Session.GetInt32(RND_NUM);
+            if (r == 0) answer = NewNumber();
+            return r;
+        }
     }
+
+
 }

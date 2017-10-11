@@ -13,8 +13,14 @@ namespace Lab_1_Number_Guess.Pages
     {
         private int answer;
 
+        /// <summary>
+        /// Message property, stores the instructions / results, assigned in OnGet and OnPost methods
+        /// </summary>
         public string Message { get; set; }
 
+        /// <summary>
+        /// Answer property, used with NumberGuess object number property.
+        /// </summary>
         public int Answer
         {
             get { return answer; }
@@ -24,14 +30,19 @@ namespace Lab_1_Number_Guess.Pages
         NumberGuess ng;
         const string RND_NUM = "Random_Number";
 
-        //on get request
+        /// <summary>
+        /// On Get event trigger
+        /// </summary>
         public void OnGet()
         {
             answer = NewNumber();
             Message = "Enter your guess below:";
         }
         
-        //on post request
+        /// <summary>
+        /// On Post event trigger
+        /// </summary>
+        /// <returns>Returns the page with result paramaters.</returns>
         public IActionResult OnPost()
         {
             answer = GetNumber();
@@ -57,12 +68,20 @@ namespace Lab_1_Number_Guess.Pages
             }
             return Page();
         }
-        //assign number to session
+
+        /// <summary>
+        /// Save the number to the session // called in New Number method.
+        /// </summary>
+        /// <param name="number">The number to save</param>
         public void SaveNumber(int number)
         {
             HttpContext.Session.SetInt32(RND_NUM,number);
         }
 
+        /// <summary>
+        /// Generate a new number and save it to session data
+        /// </summary>
+        /// <returns>The number</returns>
         public int NewNumber()
         {
             ng = new NumberGuess();
@@ -71,6 +90,10 @@ namespace Lab_1_Number_Guess.Pages
             return answer;
         }
 
+        /// <summary>
+        /// Get the number from the session data, generates a new number if none are found.
+        /// </summary>
+        /// <returns>the number</returns>
         public int GetNumber()
         {
             int r = (int)HttpContext.Session.GetInt32(RND_NUM);

@@ -7,22 +7,22 @@ using System;
 namespace Rps.Library
 {
 
-    public enum handShape { rock, paper, scissors }
+    public enum HandShape { rock, paper, scissors }
 
     public class RpsLogic
     {
         Random rand = new Random();
-        handShape machineHand;
+        HandShape machineHand;
 
 
         /// <summary>
         /// Randomly chooses a number to represent a hand position.
         /// </summary>
-        /// <returns>1 for rock, 2 for paper, 3 for scissors.</returns>
-        public handShape ChooseHand()
+        /// <returns>0 for rock, 1 for paper, 2 for scissors.</returns>
+        public HandShape ChooseHand()
         {
-            machineHand = (handShape)rand.Next(3);
-            return machineHand;  // produces random 0 through 2
+            machineHand = (HandShape)rand.Next(3);
+            return machineHand;
         }
 
 
@@ -31,16 +31,18 @@ namespace Rps.Library
         /// <summary>
         /// checks to see who won
         /// </summary>
-        /// <param name="hand"></param>
+        /// <param name="hand">player guess</param>
         /// <returns>-1 for lose, 0 for tie, 1 for win</returns>
         public int WhoWon(string hand)
         {
+            if (hand == null) throw new ArgumentNullException("Hand cannot be null, must be 'rock', 'paper', or 'scissors'");
+
             // Convert the user's hand shape choice to an enum
-            handShape playerHand = (handShape)Enum.Parse(typeof(handShape), hand.ToLower());
+            HandShape playerHand = (HandShape)Enum.Parse(typeof(HandShape), hand.ToLower());
             if (playerHand == machineHand)
                 return 0;
-            else if ((playerHand == handShape.rock && machineHand == handShape.scissors) ||
-                     (playerHand > machineHand && !(machineHand == handShape.rock && playerHand == handShape.scissors)))
+            else if ((playerHand == HandShape.rock && machineHand == HandShape.scissors) ||
+                     (playerHand > machineHand && !(machineHand == HandShape.rock && playerHand == HandShape.scissors)))
                 return 1;
             else
                 return -1;

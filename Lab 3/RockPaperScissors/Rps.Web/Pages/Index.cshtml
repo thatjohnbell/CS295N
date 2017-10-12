@@ -3,7 +3,74 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Play";
-
-//moved content strings to code behind because they are relative to if there is a name input
 }
-@Model.Content
+
+
+<div id="nameForm">
+Please Enter Your Name:
+    <input type="text" id="pname" />
+    <input type="submit" id="saveName" />
+</div>
+
+<div id="nameDisplay">
+    <span id="playerName">Welcome, @Model.Name!</span>
+</div>
+
+<div id="nameFormDisplay">
+    <input type="text" name="name" value="@Model.Name" />
+</div>
+
+<div id="gameForm">
+    @Model.Message<br />
+    <form method="post">
+        <select name="playerGuess">
+            <option value ="rock">Rock</option>
+            <option value="paper">Paper</option>
+            <option value="scissors">Scissors</option>
+        </select>
+        <br /><input type="submit" />
+    </form>
+    <p />
+    @Model.Score
+</div>
+
+
+<script>
+    var name = "";
+    $(document).ready(function () {
+        $("#nameFormDisplay").hide();
+        @Html.Raw(@Model.JQueryExtras)
+
+
+        //when a submit button is clicked, put its name into the action hidden field
+        $("#saveName").click(function () {
+            $("#nameForm").hide(100);
+            name = $("#pname").val();
+            $("#playerName").html("Welcome " + name + "!");
+            //just going to send name with form every time because I want the user to be able to change it at will way to change it, 
+            //will save in session also because I assume that was the intention of the assignment
+            $("#name").val(name);
+            
+            $("#nameDisplay").show();
+            $("#gameForm").fadeIn(50);
+
+        });
+
+
+        //when name is clicked, make it editable to user so they can change the name
+        $("#playerName").click(function () {
+            $("#nameFormDisplay").show();
+            $("#nameDisplay").hide();
+        });
+
+        //name box is unclicked - set back to display text
+        $("#name").blur(function () {
+            $("#nameFormDisplay").hide();
+            name = $("#name").val();
+            $("#playerName").html("Welcome " + name + "!");
+            $("#nameDisplay").show();
+        });
+
+    });
+
+</script>

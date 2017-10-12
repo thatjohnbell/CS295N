@@ -7,19 +7,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Rps.Library;
 using Microsoft.AspNetCore.Http;
 
+
 namespace Rps.Web.Pages
 {
     public class IndexModel : PageModel
     {
         private int winner;
         private string scores;
-        private string mess;
+        private string mess = "Will You win this game of Rock Paper Scissors?";
         private string name;
-        private string cont;
+        private string jqExtras;
 
         const string PLAYERNAME = "Player_Score";
         const string CPUNAME = "Cpu_Score";
         const string NAME = "Player_Name";
+
+        #region properties
 
         public string Message
         {
@@ -32,73 +35,77 @@ namespace Rps.Web.Pages
             get { return scores; }
             set { scores = value; }
         }
-        
+
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
-        public string Content { get { return cont; } }
+
+        public string JQueryExtras { get { return jqExtras; } }
+
+        #endregion
 
 
+        #region request events
         public void OnGet()
         {
-            mess = "";
             scores = "";
             name = "";
-            cont = "Enter Your Name to Begin:<br /><form method=\"post\"><input type=\"text\" name=\"@PLAYERNAME\"><br /><input type=\"Submit\" value=\"Go\">";
+            jqExtras = "$(\"#nameDisplay\").hide(); $(\"#gameForm\").hide();";
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            //if the user submitted the name form, then submit it and display guess form, user form is displayed on get
-            if (Request.QueryString.ToString().IndexOf(PLAYERNAME) !=0)
-            {
-                SavePlayerName(Request.Form[PLAYERNAME]);
+            //hide initial name prompt div since we have a name to display
+            jqExtras = "$(\"#nameForm\").hide();";
 
+            //get name from session and save if updated since last
+            name = GetPlayerName();
+            if (name != Request.Form["name"])
+            {
+                name = Request.Form["name"];
+                SavePlayerName(name);
             }
-            //otherwise process their guess and display info, display rps form outside of this sequence
+
+            name = Request.Form["name"];
+
+            //get session data for scores and user
+            int pscore = GetScores(PLAYERNAME);
+            int cscore = GetScores(CPUNAME);
+
+            //create rps object and get info
+            RpsLogic rps = new RpsLogic();
+            rps.ChooseHand();
+            winner = rps.WhoWon(Request.Form["playerGuess"]);
+
+            //I updated your RPSLogic class to output an int instead of a string for versatility
+            //check if winner and make updates
+            if (winner < 0)
+            {
+                mess = "Oh no, the Computer Won<p />";
+                SetScore(CPUNAME, cscore++);
+            }
+            else if (winner > 0)
+            {
+                mess = "Yay, You Won!<p />";
+                SetScore(PLAYERNAME, pscore++);
+            }
             else
             {
-                //fill name from session
-                name = GetPlayerName();
-
-                //get session data for scores and user
-                int pscore = GetScores(PLAYERNAME);
-                int cscore = GetScores(CPUNAME);
-
-                //see what they selected
-                string user = Request.Form["user"];
- 
-                //create rps object and get info
-                RpsLogic rps = new RpsLogic();
-                rps.ChooseHand();
-                winner = rps.WhoWon(user);
-
-                //I updated your RPSLogic class to output an int instead of a string for versatility
-                //check if winner and make updates
-                if (winner < 0)
-                {
-                    mess = "Oh no, the Computer Won<p />";
-                    SetScore(CPUNAME, cscore++);
-                }
-                else if (winner > 0)
-                {
-                    mess = "Yay, You Won!<p />";
-                    SetScore(PLAYERNAME, pscore++);
-                }
-                else
-                {
-                    mess = "Tie Game! Try again!<p />";
-                }
+                mess = "Tie Game! Try again!<p />";
             }
 
-
-            //in this content add the form and then the score output and then spend sixteen hours fixing the bugs you just made :p
-            cont = mess + "";
-
+            //update score display, saying 'your score' instead of name because it is more personal, name is already displayed in welcome message on top as well
+            scores = "Your Wins: " + pscore + "<br />Computer Wins: " + cscore;
+            return Page();
         }
+
+        #endregion
+
+
+        #region client session methods
 
         public void SavePlayerName(string name)
         {
@@ -112,13 +119,22 @@ namespace Rps.Web.Pages
 
         public int GetScores(string name)
         {
-            return (int)HttpContext.Session.GetInt32(name);
+            if (HttpContext.Session.GetInt32(name) == null) return 5;
+                else return (int)HttpContext.Session.GetInt32(name);
         }
 
         public void SetScore(string name, int score)
         {
-            HttpContext.Session.SetInt32(name, score);
+            try
+            {
+                HttpContext.Session.SetInt32(name, score);
+            }
+            catch (Exception ex)
+            {
+                name = ex.ToString();
+            } 
         }
 
+        #endregion
     }
 }

@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@Model.Result
+<form method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="input"></label><br />
+                <input type="text" name="input" />
+                <button type="submit" asp-page-handler="intSub">Convert to Roman</button>
+            </td>
+            <td>
+                <label for="input"></label><br />
+                <input type="text" name="input" />
+                <button type="submit" asp-page-handler="romSub">Convert to Integer</button>
+            </td>
+        </tr>
+    </table>
+</form>

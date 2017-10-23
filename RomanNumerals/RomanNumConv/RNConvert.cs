@@ -4,7 +4,6 @@ namespace RomanNumConv
 {
     public class RNConvert
     {
-        string[] ro = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" };
 
 
         /// <summary>
@@ -12,8 +11,10 @@ namespace RomanNumConv
         /// </summary>
         /// <param name="r">Roman Decimal String</param>
         /// <returns>Arabaic Integer</returns>
-        public int ConvertRtoI(string r)
+        public static int ConvertRtoI(string r)
         {
+            string[] ro = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" };
+
             return Array.IndexOf(ro,r)+1;
         }
 
@@ -22,16 +23,13 @@ namespace RomanNumConv
         /// </summary>
         /// <param name="i">Arabic Intiger</param>
         /// <returns>Roman Decimal String</returns>
-        public string ConvertItoR(int i)
+        public static string ConvertItoR(int i)
         {
+            string[] ro = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" };
+
 
             return ro[i-1];
         }
-
-
-        //Convert a integer to a roman numeral
-
-
 
     }
 }

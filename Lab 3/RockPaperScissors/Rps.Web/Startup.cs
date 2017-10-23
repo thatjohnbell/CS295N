@@ -14,7 +14,7 @@ public class Startup
         services.AddSession(options =>
         {
             // Set a short timeout for easy testing.
-            options.IdleTimeout = TimeSpan.FromSeconds(1000);
+            options.IdleTimeout = TimeSpan.FromSeconds(500);
             options.Cookie.HttpOnly = true;
         });
     }

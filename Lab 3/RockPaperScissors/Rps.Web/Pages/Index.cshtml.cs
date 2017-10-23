@@ -54,6 +54,8 @@ namespace Rps.Web.Pages
             scores = "";
             name = "";
             jqExtras = "$(\"#nameDisplay\").hide(); $(\"#gameForm\").hide();";
+            SetScore(PLAYERNAME, 0);
+                SetScore(CPUNAME, 0);
         }
 
         public IActionResult OnPost()
@@ -85,12 +87,12 @@ namespace Rps.Web.Pages
             if (winner < 0)
             {
                 mess = "Oh no, the Computer Won<p />";
-                SetScore(CPUNAME, cscore++);
+                SetScore(CPUNAME, ++cscore);
             }
             else if (winner > 0)
             {
                 mess = "Yay, You Won!<p />";
-                SetScore(PLAYERNAME, pscore++);
+                SetScore(PLAYERNAME, ++pscore);
             }
             else
             {
@@ -119,7 +121,7 @@ namespace Rps.Web.Pages
 
         public int GetScores(string name)
         {
-            if (HttpContext.Session.GetInt32(name) == null) return 5;
+            if (HttpContext.Session.GetInt32(name) == null) return 0;
                 else return (int)HttpContext.Session.GetInt32(name);
         }
 
@@ -134,7 +136,6 @@ namespace Rps.Web.Pages
                 name = ex.ToString();
             } 
         }
-
         #endregion
     }
 }

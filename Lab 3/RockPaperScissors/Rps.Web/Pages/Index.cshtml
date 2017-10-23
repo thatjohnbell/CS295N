@@ -5,41 +5,41 @@
     ViewData["Title"] = "Play";
 }
 
+<form method="post">
+    <div id="nameForm">
+        Please Enter Your Name:
+        <input type="text" id="pname" />
+        <input type="button" value="Save" id="saveName" />
+    </div>
 
-<div id="nameForm">
-Please Enter Your Name:
-    <input type="text" id="pname" />
-    <input type="submit" id="saveName" />
-</div>
+    <div id="nameDisplay">
+        <span id="playerName">Welcome, @Model.Name!</span>
+    </div>
 
-<div id="nameDisplay">
-    <span id="playerName">Welcome, @Model.Name!</span>
-</div>
+    <div id="nameFormDisplay">
+        <input type="text" id="name" name="name" value="@Model.Name" />
+    </div>
 
-<div id="nameFormDisplay">
-    <input type="text" name="name" value="@Model.Name" />
-</div>
+    <div id="gameForm">
+        @Html.Raw(Model.Message)<br />
 
-<div id="gameForm">
-    @Model.Message<br />
-    <form method="post">
         <select name="playerGuess">
-            <option value ="rock">Rock</option>
+            <option value="rock">Rock</option>
             <option value="paper">Paper</option>
             <option value="scissors">Scissors</option>
         </select>
         <br /><input type="submit" />
-    </form>
-    <p />
-    @Model.Score
-</div>
 
+        <p />
+        @Html.Raw(Model.Score)
+    </div>
 
+</form>
 <script>
     var name = "";
     $(document).ready(function () {
         $("#nameFormDisplay").hide();
-        @Html.Raw(@Model.JQueryExtras)
+        @Html.Raw(Model.JQueryExtras)
 
 
         //when a submit button is clicked, put its name into the action hidden field

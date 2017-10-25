@@ -19,6 +19,9 @@ namespace Rps.Library
         /// Randomly chooses a number to represent a hand position.
         /// </summary>
         /// <returns>0 for rock, 1 for paper, 2 for scissors.</returns>
+
+            public string CpuHand { get { return machineHand.ToString(); } }
+
         public HandShape ChooseHand()
         {
             machineHand = (HandShape)rand.Next(3);

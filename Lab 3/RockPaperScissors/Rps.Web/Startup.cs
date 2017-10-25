@@ -26,5 +26,6 @@ public class Startup
     {
         app.UseSession();
         app.UseMvcWithDefaultRoute();
+        app.UseStaticFiles();
     }
 }

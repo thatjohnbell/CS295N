@@ -82,21 +82,23 @@ namespace Rps.Web.Pages
             rps.ChooseHand();
             winner = rps.WhoWon(Request.Form["playerGuess"]);
 
+            mess = "You Chose " + Request.Form["playerGuess"] +"<br /><img src=\"images/" + Request.Form["playerGuess"] + ".png\"><br />The Computer Chose "+rps.CpuHand+"<br /><img src=\"images/" +rps.CpuHand + ".png\"><p />";
+
             //I updated your RPSLogic class to output an int instead of a string for versatility
             //check if winner and make updates
             if (winner < 0)
             {
-                mess = "Oh no, the Computer Won<p />";
+                mess += "Oh no, the Computer Won<p />";
                 SetScore(CPUNAME, ++cscore);
             }
             else if (winner > 0)
             {
-                mess = "Yay, You Won!<p />";
+                mess += "Yay, You Won!<p />";
                 SetScore(PLAYERNAME, ++pscore);
             }
             else
             {
-                mess = "Tie Game! Try again!<p />";
+                mess += "Tie Game! Try again!<p />";
             }
 
             //update score display, saying 'your score' instead of name because it is more personal, name is already displayed in welcome message on top as well

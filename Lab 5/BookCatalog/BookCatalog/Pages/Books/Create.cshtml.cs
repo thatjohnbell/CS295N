@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BookCatalog;
+using Microsoft.AspNetCore.Http;
 
 namespace BookCatalog.Pages.Books
 {
     public class CreateModel : PageModel
     {
         private readonly BookCatalog.BookContext _context;
+        const string NAME = "username";
 
         public CreateModel(BookCatalog.BookContext context)
         {
@@ -34,9 +36,23 @@ namespace BookCatalog.Pages.Books
             }
 
             _context.Book.Add(Book);
+            SetName(Book.Rater);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        public void SetName(string n)
+        {
+            HttpContext.Session.SetString(NAME, n);
+
+        }
+
+        public string GetName()
+        {
+            string n = HttpContext.Session.GetString(NAME);
+            if (n == null) n = "";
+            return n;
         }
     }
 }

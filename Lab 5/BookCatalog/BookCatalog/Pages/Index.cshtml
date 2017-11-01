@@ -7,5 +7,17 @@
 <p />
 &nbsp;<a href="/Books">
 Click Here to View The Book List.</a>
-<p />
-When you Create a Book, your rating name will be saved so you will not need to enter it again however you will be able to edit it when creating another book item.
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Name" class="control-label"></label>
+        <input asp-for="@Model.Name" class="form-control" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Continue" class="btn btn-default" />
+    </div>
+    </form>
+    <p />
+    When you Create a Book, your rating name will be saved so you will not need to enter it again however you will be able to edit it when creating another book item.

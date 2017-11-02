@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BookCatalog;
 
 namespace BookCatalog.Pages.Books
 {
     public class IndexModel : PageModel
     {
+
         private readonly BookCatalog.BookContext _context;
 
         public IndexModel(BookCatalog.BookContext context)
@@ -20,9 +17,11 @@ namespace BookCatalog.Pages.Books
 
         public IList<Book> Book { get;set; }
 
+
         public async Task OnGetAsync()
         {
-            Book = await _context.Book.ToListAsync();
+
+           Book = await _context.Book.ToListAsync();
         }
     }
 }

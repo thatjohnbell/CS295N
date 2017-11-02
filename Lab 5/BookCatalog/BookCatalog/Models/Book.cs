@@ -7,7 +7,7 @@ namespace BookCatalog
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        [Display(Name = "Published Date")]
+        [Display(Name = "Publication Date")]
         [DataType(DataType.Date)]
         public DateTime DatePublished { get; set; }
         public string Author { get; set; }

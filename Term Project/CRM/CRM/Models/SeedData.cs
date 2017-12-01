@@ -14,11 +14,11 @@ namespace CRM.Models
             using (var context = new CustContext(
                 serviceProvider.GetRequiredService<DbContextOptions<CustContext>>()))
             {
-                // Look for any movies.
+                
                 if (context.Customer.Any())
-                {
-                    return;   // DB has been seeded
-                }
+                    {
+                        return;   // DB has been seeded
+                    }
 
                 context.Customer.AddRange(
                     new Customer
@@ -32,8 +32,11 @@ namespace CRM.Models
                         LastContact = DateTime.Parse("2017-11-29"),
                         Notes = "",
                         CustomerType = "Customer",
-                        ZipCode = 97477
-                        
+                        ZipCode = 97477,
+                        CompanyName = "RST Company",
+                        Position = "Manager"
+
+
                     },
                     new Customer
                     {
@@ -46,7 +49,10 @@ namespace CRM.Models
                         LastContact = DateTime.Parse("2017-11-28"),
                         Notes = "",
                         CustomerType = "Customer",
-                        ZipCode = 97477
+                        ZipCode = 97477,
+                        CompanyName = "LMNO Company",
+                        Position = "Manager"
+
 
                     },
 new Customer
@@ -60,7 +66,10 @@ new Customer
     LastContact = DateTime.Parse("2017-11-27"),
     Notes = "",
     CustomerType = "Customer",
-    ZipCode = 97477
+    ZipCode = 97477,
+    CompanyName = "RST Company",
+    Position = "Manager"
+
 
 },
 new Customer
@@ -74,7 +83,10 @@ new Customer
     LastContact = DateTime.Parse("2017-11-26"),
     Notes = "",
     CustomerType = "Customer",
-    ZipCode = 97402
+    ZipCode = 97402,
+    CompanyName = "ASDF Company",
+    Position = "Manager"
+
 
 },
 new Customer
@@ -88,7 +100,10 @@ new Customer
     LastContact = DateTime.Parse("2017-11-25"),
     Notes = "",
     CustomerType = "Lead",
-    ZipCode = 97402
+    ZipCode = 97402,
+    CompanyName = "WSAD Company",
+    Position = "Manager"
+
 
 },
 new Customer
@@ -102,7 +117,9 @@ new Customer
     LastContact = DateTime.Parse("2017-11-24"),
     Notes = "",
     CustomerType = "Lead",
-    ZipCode = 97408
+    ZipCode = 97408,
+    CompanyName = "FAST Analytics",
+    Position = "Owner"
 },
 new Customer
 {
@@ -115,7 +132,10 @@ new Customer
     LastContact = DateTime.Parse("2017-11-23"),
     Notes = "",
     CustomerType = "Lead",
-    ZipCode = 97405
+    ZipCode = 97405,
+    CompanyName = "XYZ Company",
+    Position = "Manager"
+
 
 },
 new Customer
@@ -129,7 +149,9 @@ new Customer
     LastContact = DateTime.Parse("2017-11-22"),
     Notes = "",
     CustomerType = "Lead",
-    ZipCode = 97478
+    ZipCode = 97478,
+    CompanyName = "ABC Company",
+    Position = "Manager"
 
 }
 

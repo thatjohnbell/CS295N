@@ -1,0 +1,82 @@
+@page "{Type?}"
+@model CRM.Pages.ViewModel
+
+
+
+@{
+    ViewData["Title"] = "View Clients";
+}
+
+
+
+<h2>View Clients</h2>
+<form>
+<select asp-for="Type" asp-items="Model.Types">
+    <option value="">All</option>
+</select>
+    <input type="Submit" value="View" />
+    </form>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer[0].FirstName)
+                </th>
+                <th>
+                    @Html.ActionLink("Last Name", "View", new { sortOrder = Model.NameSort, type = Model.Type })
+
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer[0].CustomerType)
+            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer[0].PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer[0].CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer[0].Position)
+                </th>
+                <th>
+                    @Html.ActionLink("Last Contacted", "View", new { sortOrder = Model.DateSort })
+                </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Customer) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastContact)
+            </td>
+
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.ID">View</a> | <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

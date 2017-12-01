@@ -22,6 +22,7 @@ namespace CRM.Pages
 
         [BindProperty]
         public Customer Customer { get; set; }
+        public IEnumerable<SelectListItem> CustomerTypes { set; get; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -57,7 +58,7 @@ namespace CRM.Pages
                 
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./View");
         }
     }
 }

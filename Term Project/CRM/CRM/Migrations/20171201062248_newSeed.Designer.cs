@@ -11,9 +11,10 @@ using System;
 namespace CRM.Migrations
 {
     [DbContext(typeof(CustContext))]
-    partial class CustContextModelSnapshot : ModelSnapshot
+    [Migration("20171201062248_newSeed")]
+    partial class newSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,6 +14,9 @@ namespace CRM.Pages
     {
         private readonly CRM.Models.CustContext _context;
 
+        public IEnumerable<SelectListItem> CustomerTypes { set; get; }
+
+
         public CreateModel(CRM.Models.CustContext context)
         {
             _context = context;

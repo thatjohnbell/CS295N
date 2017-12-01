@@ -9,62 +9,42 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Customer</h4>
+    <h4>Delete @Model.Customer.CustomerType</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.StreetAddress)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.StreetAddress)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.State)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.State)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.ZipCode)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.ZipCode)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.Notes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Notes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.LastContact)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Customer.LastContact)
-        </dd>
-    </dl>
+    <div style="float:left;margin:10px;">
+        <strong>Name</strong><br />
+        @Html.DisplayFor(model => model.Customer.FirstName) @Html.DisplayFor(model => model.Customer.LastName)
+        <br />&nbsp;<br />
+
+        <strong>Company</strong><br />
+        @Html.DisplayFor(model => model.Customer.CompanyName), @Html.DisplayFor(model => model.Customer.Position)
+
+
+    </div>
+
+
+<div style="margin:10px;">
+    <strong>Phone Number</strong><br />
+    @Html.DisplayFor(model => model.Customer.PhoneNumber)
+    <br />&nbsp;<br />
+    <strong>Address</strong><br />
+    @Html.DisplayFor(model => model.Customer.StreetAddress)
+    <br />
+    @Html.DisplayFor(model => model.Customer.City), @Html.DisplayFor(model => model.Customer.State), @Html.DisplayFor(model => model.Customer.ZipCode)
+
+
+</div>
+<div style="clear:both"></div>
+<br />
+    <strong>Account Notes</strong><br />
+  @Html.DisplayFor(model => model.Customer.Notes)
+    </div>
+
+<br />&nbsp;<br />
     
     <form method="post">
         <input type="hidden" asp-for="Customer.ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
-</div>
+

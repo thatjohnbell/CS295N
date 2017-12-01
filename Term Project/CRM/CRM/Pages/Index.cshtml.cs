@@ -19,11 +19,15 @@ namespace CRM.Pages
             _context = context;
         }
 
-        public IList<Customer> Customer { get;set; }
+        public Customer Customer { get;set; }
+        public Customer Lead { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Customer = await _context.Customer.ToListAsync();
+            Customer = (from c in _context.Customer
+                        select c).Where(s => s.CustomerType.Equals("Customer")).OrderBy(s => s.LastContact).FirstOrDefault();
+            Lead = (from c in _context.Customer
+                    select c).Where(s => s.CustomerType.Equals("Lead")).OrderBy(s => s.LastContact).FirstOrDefault();
         }
     }
 }

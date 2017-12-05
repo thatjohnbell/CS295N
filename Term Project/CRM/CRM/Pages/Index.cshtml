@@ -10,9 +10,9 @@
 It's important to regularly follow up with customers and leads.  Recommened contacts are listed below, or you can <a href="View">View all clients</a>.
 <p />&nbsp;<br />
 <font color="red" size="+1"><strong>Next Customer</strong></font><br />
-@Html.DisplayFor(model => model.Customer.FirstName) @Html.DisplayFor(model => model.Customer.LastName) Phone: @Html.DisplayFor(model => model.Customer.PhoneNumber)<br />Last Contacted: @Html.DisplayFor(model => model.Customer.LastContact)<br />
+@Html.DisplayFor(model => model.Customer.FirstName) @Html.DisplayFor(model => model.Customer.LastName)<br />Phone: @Html.DisplayFor(model => model.Customer.PhoneNumber)<br />Last Contacted: @Html.DisplayFor(model => model.Customer.LastContact)<br />
 <a href="Details?id=@Model.Customer.ID">View Details</a> | <a href="View?Type=Customer">View All Customers</a>
 <p />
 <font color="red" size="+1"><strong>Next Lead</strong></font><br />
-@Html.DisplayFor(model => model.Lead.FirstName) @Html.DisplayFor(model => model.Lead.LastName) Phone: @Html.DisplayFor(model => model.Lead.PhoneNumber)<br />Last Contacted: @Html.DisplayFor(model => model.Lead.LastContact)<br />
+@Html.DisplayFor(model => model.Lead.FirstName) @Html.DisplayFor(model => model.Lead.LastName)<br />Phone: @Html.DisplayFor(model => model.Lead.PhoneNumber)<br />Last Contacted: @Html.DisplayFor(model => model.Lead.LastContact)<br />
 <a href="Details?id=@Model.Lead.ID">View Details</a> | <a href="View?Type=Lead">View All Leads</a>

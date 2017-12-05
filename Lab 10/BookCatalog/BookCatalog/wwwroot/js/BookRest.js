@@ -1,5 +1,5 @@
-﻿ const BOOK_URL = "http://localhost:64949/api/books";
-//const BOOK_URL = "http://webapibook.azurewebsites.net/api/books";
+﻿// const BOOK_URL = "http://localhost:64949/api/books";
+const BOOK_URL = "http://BookCatalog20171113125732.azurewebsites.net/api/books";
 
 /***********************************************************/
 /************* Get all books from the database ************/
@@ -30,7 +30,7 @@ function addRow(book) {
     for (var i in fields) {
         var td = document.createElement('td');
         var field = fields[i];
-        if (field == "datePublished") {
+        if (field === "datePublished") {
             td.innerHTML = book[field].substr(0, 10);
         } else {
             td.innerHTML = book[field];
@@ -78,7 +78,7 @@ function addBook() {
     // serialize the data to a string so it can be sent
     var dataString = JSON.stringify(data);
     xhr.send(dataString);
-	 addRow(data);
+    addRow(data);
 }
 
 /***********************************************************/
@@ -159,12 +159,12 @@ function deleteBook() {
     xhr.open("DELETE", BOOK_URL + "/" + data.id, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onerror = errorHandler;
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         // if readyState is "done" and status is "success"
-        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 204) {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 204) {
             clearSelectList();
             getAllBooks(fillSelectList);
         }
-    }
+    };
     xhr.send();
 }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM", "CRM\CRM.csproj", "{BFDC094E-1C17-49A5-8E09-322AAE78344A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM", "CRM\CRM.csproj", "{BFDC094E-1C17-49A5-8E09-322AAE78344A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRMxUnitTest", "CRMxUnitTest\CRMxUnitTest.csproj", "{FEC6A2F7-BDD7-4C52-86D4-C87FCBB979E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BFDC094E-1C17-49A5-8E09-322AAE78344A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFDC094E-1C17-49A5-8E09-322AAE78344A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFDC094E-1C17-49A5-8E09-322AAE78344A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEC6A2F7-BDD7-4C52-86D4-C87FCBB979E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC6A2F7-BDD7-4C52-86D4-C87FCBB979E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC6A2F7-BDD7-4C52-86D4-C87FCBB979E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC6A2F7-BDD7-4C52-86D4-C87FCBB979E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

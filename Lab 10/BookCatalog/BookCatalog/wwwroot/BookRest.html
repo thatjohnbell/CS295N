@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="js/bookRest.js"></script>
+    <script>
+        // set up event handlers for this page
+        function init() {
+            // set up the event handler for posting book data
+            var form = document.getElementById("bookForm");
+            form.onsubmit = function(e) {
+                // prevent the form from sending an HTTP request when it is submitted
+                e.preventDefault();
+                addBook();
+            };
+            // Fill the table on the page with book data when the page opens
+            getAllBooks(fillTable);
+        }
+    </script>
+    <title>Book API Client</title>
+</head>
+
+<body onload=init()>
+
+    <h1>Book Web Service Client</h1>
+
+    <nav>
+        <a href="#addbook">Add a book to the database</a><br>
+        <a href="BookUpdate.html">Edit a book already in the database</a><br>
+    </nav>
+
+    <h2>List of all books</h2>
+    <table border="1" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Date Published</th>
+                <th>Rating</th>
+                <th>Rater</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <section id="addbook">
+        <h2>Add a book</h2>
+        <form id="bookForm">
+           <table border="0">
+<tr><td>
+		   <label for="title">Title</label>
+		   </td><td>
+            <input name="title" placeholder="My book">
+            </td></tr><tr><td>
+            <label for="author">Book Author</label>
+		   </td><td>
+            <input name="author" placeholder="Book Author">
+            </td></tr><tr><td>
+            <label for="publisher">Publisher</label>
+		   </td><td>
+            <input name="publisher" placeholder="Book Publisher">
+            </td></tr><tr><td>
+            <label for="datePublished">Date Published</label>
+		   </td><td>
+            <input name="datePublished" placeholder="12/31/2000">
+            </td></tr><tr><td>
+            <label for="rating">Rating</label>
+		   </td><td>
+            <input name="rating" placeholder="5">
+            </td></tr><tr><td>
+            <label for="rater">Rater</label>
+		   </td><td>
+            <input name="rater" placeholder="Your Name">
+            </td></tr><tr><td>
+            <button>Add book</button></td><td></td></tr></table>
+        </form>
+    </section>
+</body>
+
+</html>

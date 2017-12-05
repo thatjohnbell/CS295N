@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="js/bookRest.js"></script>
+
+    <script>
+        // set event handlers and fill the select list
+        function init() {
+            // set up the event handler for posting Book data
+            var form = document.getElementById("bookForm");
+            form.onsubmit = function(event) {
+                // prevent the form from sending an HTTP request when it is submitted
+                event.preventDefault();
+                updateBook();
+            };
+            var deleteButton = document.getElementById("deleteButton");
+            deleteButton.onclick = deleteBook;
+            // set the event handler for the select list
+            var sel = document.getElementsByTagName("select")[0];
+            sel.onchange = getBookById;
+            // Fill the table on the page with Book data when the page opens
+            getAllBooks(fillSelectList);
+        }
+    </script>
+    <title></title>
+</head>
+
+<body onload=init()>
+
+    <h1>Update a Book</h1>
+    <nav>
+        <a href="BookRest.html">List all Books</a><br>
+        <a href="BookRest.html#addBook">Add a Book</a><br>
+    </nav>
+    <form id="bookForm">
+        <p>
+            <select>
+                <option value="0">Choose a Book</option>
+            </select>
+        </p>
+        <input name="id" hidden>
+           <table border="0">
+<tr><td>
+		   <label for="title">Title</label>
+		   </td><td>
+            <input name="title" placeholder="My book">
+            </td></tr><tr><td>
+            <label for="author">Book Author</label>
+		   </td><td>
+            <input name="author" placeholder="Book Author">
+            </td></tr><tr><td>
+            <label for="publisher">Publisher</label>
+		   </td><td>
+            <input name="publisher" placeholder="Book Publisher">
+            </td></tr><tr><td>
+            <label for="datePublished">Date Published</label>
+		   </td><td>
+            <input name="datePublished" placeholder="12/31/2000">
+            </td></tr><tr><td>
+            <label for="rating">Rating</label>
+		   </td><td>
+            <input name="rating" placeholder="5">
+            </td></tr><tr><td>
+            <label for="rater">Rater</label>
+		   </td><td>
+            <input name="rater" placeholder="Your Name">
+            </td></tr><tr><td>
+            <button id="updateButton">Update Book</button></td><td><button id="deleteButton">Delete Book</button></td></tr></table>
+        
+    </form>
+    
+</body>
+
+</html>
